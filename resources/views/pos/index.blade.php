@@ -175,6 +175,8 @@
                                 // if(res.success == false){
                                 //     alert("Transaction failed, please try again");
                                 // }
+
+                                $("#result, #cartresult").html("");
                             }
                         });
                     });
