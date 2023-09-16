@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Models\Sale;
+use App\Http\Controllers\PosController;
 
 class PosController extends Controller
 {
@@ -15,7 +17,34 @@ class PosController extends Controller
     }
 
     public function print(Request $request){
-        dd($request->input());
+        $ids = $request->input("id");
+        $qtys = $request->input("qty");
+        $id = $ids != null ? explode(",",$ids) : $ids;
+        $qty = $qtys != null ? explode(",",$qtys) : $qtys;
+
+        $products = DB::table("product")
+            ->whereIn("id", $id)
+            ->get();
+        
+        $transaction = TransactionController::print();
+        $total = 0;
+
+        foreach($products as $idx => $product){
+            $srp = $product->srp;
+            $pId = $product->id;
+            $qtyIdx = array_search($pId, $id);
+
+            $total += $srp * $id[$qtyIdx];
+
+            Sale::create([
+                "productid" => $pId
+                , "transactionid" => $transaction->id
+                , "qty" => $id[$qtyIdx]
+                , "srp" => $srp
+            ]);
+        }
+
+        dd($total);
     }
 
     public function getById(Request $request){
@@ -28,12 +57,10 @@ class PosController extends Controller
             ->get()
             ->first();
 
-        $total = $this->updateCart($product);
         $product->path = asset('images/'.$product->path);
 
         $data = array(
-            "product" => $product,
-            "total" => $total
+            "product" => $product
         );
 
         die(json_encode($data));
@@ -41,19 +68,6 @@ class PosController extends Controller
 
     public function addToCart($item1, $item2){
         return $item1->qty + $item2->qty;
-    }
-
-    public function updateCart($products){
-        $this->cartItems[] = $products;
-        $cartItems = $this->cartItems;
-        $total = 0;
-      
-
-        foreach($cartItems as $idx => $item){
-            $total += ($item->srp*$item->qty);
-        }
-
-        return $total;
     }
 
     public function search(Request $request){

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->integer("userid");
+            $table->float("total", 8,2);
         });
     }
 

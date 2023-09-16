@@ -161,7 +161,6 @@
                         let me = $(this);
                         let [id, qty] = print();
 
-                        console.log(id, qty)
                         me.find(".id").val(id);
                         me.find(".qty").val(qty);
 
