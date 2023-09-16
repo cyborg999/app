@@ -168,8 +168,13 @@
                             url : me.attr("action"),
                             data : me.serialize(),
                             type : "post",
+                            dataType: "json",
                             success: function(res){
-                                console.log(res);
+                                $("#total").html(new Intl.NumberFormat().format(res.total));
+
+                                // if(res.success == false){
+                                //     alert("Transaction failed, please try again");
+                                // }
                             }
                         });
                     });

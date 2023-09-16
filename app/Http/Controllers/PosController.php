@@ -22,29 +22,46 @@ class PosController extends Controller
         $id = $ids != null ? explode(",",$ids) : $ids;
         $qty = $qtys != null ? explode(",",$qtys) : $qtys;
 
-        $products = DB::table("product")
-            ->whereIn("id", $id)
-            ->get();
-        
-        $transaction = TransactionController::print();
-        $total = 0;
+        try {
+            DB::beginTransaction();
 
-        foreach($products as $idx => $product){
-            $srp = $product->srp;
-            $pId = $product->id;
-            $qtyIdx = array_search($pId, $id);
+            $transaction = TransactionController::print();
+            $total = 0;
 
-            $total += $srp * $id[$qtyIdx];
+            foreach($id as $idx => $i){
+                $product = Product::findOrFail($i);
 
-            Sale::create([
-                "productid" => $pId
-                , "transactionid" => $transaction->id
-                , "qty" => $id[$qtyIdx]
-                , "srp" => $srp
-            ]);
+                $srp = $product->srp;
+                $pId = $product->id;
+                $qtyIdx = array_search($pId, $id);
+                $qtyBought = $qty[$qtyIdx];
+
+                $total += $srp * $qtyBought;
+
+                //update remaining qty
+                $product->qty -= $qtyBought;
+                $product->save();
+
+                Sale::create([
+                    "productid" => $pId
+                    , "transactionid" => $transaction->id
+                    , "qty" => $qtyBought
+                    , "srp" => $srp
+                ]);
+            }
+
+
+            $transaction->total = $total;
+            $transaction->save();
+
+            DB::commit();
+
+            die(json_encode(["total" => $total, "success" => true]));
+        } catch(\Exception $e){
+            DB::rollBack();
+    
+            die(json_encode(["total" => 0, "success" => false]));
         }
-
-        dd($total);
     }
 
     public function getById(Request $request){
