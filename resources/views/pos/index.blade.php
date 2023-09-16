@@ -172,9 +172,9 @@
                             success: function(res){
                                 $("#total").html(new Intl.NumberFormat().format(res.total));
 
-                                // if(res.success == false){
-                                //     alert("Transaction failed, please try again");
-                                // }
+                                if(res.success == false){
+                                    alert("Transaction failed, please try again");
+                                }
 
                                 $("#result, #cartresult").html("");
                             }

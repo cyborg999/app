@@ -10,10 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function show(){
-        $user = array("name"=>"Jordan");
 
-        return view("user.profile", $user);
+    public function index(){
+        return view("welcome");
     }
 
     public function signup(Request $request){
@@ -73,52 +72,4 @@ class UserController extends Controller
 
     }
 
-    public function contact(){
-        return view("contact");
-    }
-
-    public function showCategory($category){
-        return "Category: ".$category;
-    }
-
-    public function submit(Request $request){
-       $validator =  $request->validate([
-            "username" => "required"
-        ]);
-        $username = $request->input("username");
-        $user = User::find(1);
-        User::create(["name" => $username, "email"=>"test@gmail.com", "password"=>"asdsa"]);
-        
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-
-    public function page($id){
-        $data = [
-            [
-                'name' => 'Cam1', 
-                'img' => "images/img2.jpg"
-            ],
-            [
-                'name' => 'Cam2', 
-                'img' => "2.jpg"
-            ],
-        ];
-
-        return view("cam", ["data" => $data, "active" => $data[$id]]);
-    }
-
-    public function cam(){
-        $data = [
-            [
-                'name' => 'Cam1', 
-                'img' => "images/img2.jpg"
-            ],
-            [
-                'name' => 'Cam2', 
-                'img' => "2.jpg"
-            ],
-        ];
-
-        return view("cam", ["data" => $data, "active" => $data[0]]);
-    }
 }

@@ -16,33 +16,13 @@ use App\Http\Controllers\PosController;
 |
 */
 
-
-Route::get("contact", [UserController::class, "contact"]);
-
-
-
-Route::get('/', function () {
-    return "Hello World";
-    return view('welcome');
-});
-
-Route::get("category/{category}", [UserController::class, "showCategory"]);
-
-
 Route::get('/user/profile', function () {
     $url = route('profile');  
     return 'The URL is ' . $url;
 })->name('profile');
 
 
-Route::get("cam", [UserController::class, "cam"]);
-Route::get("cam/{page}", [UserController::class, "page"]);
-Route::get("/home", [UserController::class,"show"]);
-Route::post("submit", [UserController::class, "submit"]);
-
-
-
-
+Route::get("/", [UserController::class, "index"]);
 Route::get("register", [UserController::class, "register"]);
 Route::get("login", [UserController::class, "login"])->name("login");
 Route::post("login", [UserController::class, "authenticate"]);
