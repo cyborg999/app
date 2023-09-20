@@ -14,7 +14,8 @@ class ProductController extends Controller
     public function all(){
         $products = Product::all();
 
-        return view("product/all", [ "data" => $products]);
+        // return view("product/all", [ "data" => $products]);
+        return view("product/index", [ "data" => $products]);
     }
 
     public function edit(Request $request){

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->id();
+            $table->string("barcode");
             $table->string("name");
             $table->longText("description")->nullable();
             $table->float("srp", 8, 2);

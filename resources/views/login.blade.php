@@ -29,7 +29,9 @@
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
           <hr class="my-4">
-          <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique minus doloremque. Cum doloribus praesentium sit quaerat earum. Ut perspiciatis neque accusantium nisi dolorem sed odit voluptatem reiciendis delectus similique.</small>
+          <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique minus doloremque. Cum doloribus praesentium sit quaerat earum. Ut perspiciatis neque accusantium nisi dolorem sed odit voluptatem reiciendis delectus similique.
+            <a href="/register">Sign Up</a>
+          </small>
         </form>
       </div>
     </div>

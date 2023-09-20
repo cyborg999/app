@@ -26,8 +26,9 @@ class UserController extends Controller
         $validatedData['type'] = "employee";
         
         $user = User::create($validatedData);
-        return view("register");
 
+        return back()
+        ->with('success', 'You have succesfully created an acount.'); 
     }
 
     public function register(){
@@ -38,9 +39,9 @@ class UserController extends Controller
         return view("login");
     }
 
-    public function dashboard(Request $request){
+    public function dashboard(){
     
-        return view("Dashboard");
+        return view("user/dashboard");
     }
 
     public function logout(Request $request){

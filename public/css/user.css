@@ -1,0 +1,14 @@
+.nav-link img {
+    height: 40px;
+}
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.content {
+    display: block;
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}

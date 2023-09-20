@@ -17,6 +17,13 @@
                 </ul>
             </div>
         @endif
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ $message }}
+             <a href="/login" class="alert-link">click here to login</a>. 
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <form class="p-4 p-md-5 border rounded-3 bg-light" method="post" action="/register">
             @csrf
           <div class="form-floating mb-3">
@@ -33,7 +40,9 @@
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
           <hr class="my-4">
-          <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique minus doloremque. Cum doloribus praesentium sit quaerat earum. Ut perspiciatis neque accusantium nisi dolorem sed odit voluptatem reiciendis delectus similique.</small>
+          <small class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis similique minus doloremque. Cum doloribus praesentium sit quaerat earum. Ut perspiciatis neque accusantium nisi dolorem sed odit voluptatem reiciendis delectus similique.
+            <a href="/login">Login</a>
+          </small>
         </form>
       </div>
     </div>
