@@ -6,15 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    //
-
     public function all(){
-        $products = Product::all();
+        $products = DB::table('product')
+        ->leftJoin("image", "product.id", "=", "image.productid")
+        ->select("product.*", "image.name as path")
+        ->get();
 
-        // return view("product/all", [ "data" => $products]);
         return view("product/index", [ "data" => $products]);
     }
 
@@ -32,6 +33,7 @@ class ProductController extends Controller
             , "srp" => "required"
             , 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             , "desc" => "required"
+            , "barcode" => "required"
             , "orig" => "required"
             , "qty" => "required|min:1"
         ]);
@@ -54,9 +56,5 @@ class ProductController extends Controller
         return back()
         ->with('success', 'You have succesfully added a product.')
         ->with('image', $imageName); 
-
-        // return redirect("products/add")
-        //     ->with('image', $imageName)
-        //     ->with("status", "You have succesfully added a product.");
     }
 }

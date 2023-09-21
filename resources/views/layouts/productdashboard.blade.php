@@ -7,6 +7,7 @@
            
             @include('includes.user.sidebar')
             <section class="content">
+                @include('product.breadcrumb')
                 @yield('content')
             </section>
         </main>

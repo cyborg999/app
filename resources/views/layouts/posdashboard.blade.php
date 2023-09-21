@@ -3,8 +3,6 @@
     @include('includes.user.head')
     <body>
         <main class="container-fluid main">
-            <!-- @section('title', 'Page Title') -->
-           
             @include('includes.user.sidebar')
             <section class="content">
                 @yield('content')

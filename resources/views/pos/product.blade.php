@@ -5,13 +5,13 @@
         <td>{{ $p->srp }}</td>
         <td>
             <input type="hidden" class="id" value="{{ $p->id }}"/>
-            <input type="number" class="qty" min="1" width="20" value="1"/>
+            <input type="number" class="qty form-control" min="1" width="20" value="1"/>
         </td>
         <td>
             <form class="frmAdd" action="pos/getById">
                 @csrf
                 <input type="hidden" name="id" value="{{ $p->id }}" />
-                <input type="submit" value="Remove"/>
+                <input type="submit" class="btn btn-sm btn-danger" value="Remove"/>
             </form>
         </td>
     </tr>
