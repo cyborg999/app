@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\InventoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,8 @@ Route::post("product/add", [ProductController::class, "add"])->middleware("auth"
 Route::get("products/add", [ProductController::class, "show"])->middleware("auth");
 Route::get("product/edit", [ProductController::class, "edit"])->middleware("auth");
 Route::get("products", [ProductController::class, "all"])->middleware("auth");
+Route::get("inventory", [InventoryController::class, "index"])->middleware("auth");
+Route::post("inventory/add", [InventoryController::class, "add"])->middleware("auth");
 Route::post("pos/search", [PosController::class, "search"])->middleware("auth");
 Route::get("pos", [PosController::class, "index"])->middleware("auth");
 Route::post("pos/getById", [PosController::class, "getById"])->middleware("auth");

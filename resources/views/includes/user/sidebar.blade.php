@@ -24,13 +24,18 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-          <svg class="bi" width="24" height="24" role="img" aria-label="Products"><use xlink:href="#grid"></use></svg>
+        <a href="/inventory" class="nav-link py-3 border-bottom {{ $page == 'inventory' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+          Inventory
         </a>
       </li>
       <li>
         <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-          <svg class="bi" width="24" height="24" role="img" aria-label="Customers"><use xlink:href="#people-circle"></use></svg>
+          Sale
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+          Account
         </a>
       </li>
     </ul>

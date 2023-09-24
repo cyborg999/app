@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Image;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +24,14 @@ class ProductController extends Controller
         // $product = Product::findOrFail($id);
     }
 
-    public function show(){
+    public function show(Request $request){
+        $barcode = "";
+
+        if(isset($_POST["barcode"])){
+            echo "<pre>";
+            var_dump($request->input("barcode"));
+        }
+
         return view("product/add");
     }
 
@@ -32,13 +40,14 @@ class ProductController extends Controller
             "name" => "required"
             , "srp" => "required"
             , 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-            , "desc" => "required"
+            , "description" => "required"
             , "barcode" => "required"
             , "orig" => "required"
             , "qty" => "required|min:1"
         ]);
 
         $validation["user_id"] = Auth::id();
+
 
         //upload img
         $imageName = time().'.'.$request->image->extension();  
@@ -52,6 +61,14 @@ class ProductController extends Controller
         );
 
         Image::create($img);
+
+        $inventory = array(
+            "userid" => Auth::id()
+            , "productid" => $product->id
+            , "qty" => $validation["qty"]
+        );
+
+        Inventory::create($inventory);
 
         return back()
         ->with('success', 'You have succesfully added a product.')

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float("srp", 8, 2);
             $table->float("orig", 8, 2);
             $table->integer("qty");
+            $table->integer("active")->default(1);
             $table->foreignId("user_id");
             $table->timestamps();
         });
