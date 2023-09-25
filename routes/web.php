@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,8 @@ Route::post("pos/search", [PosController::class, "search"])->middleware("auth");
 Route::get("pos", [PosController::class, "index"])->middleware("auth");
 Route::post("pos/getById", [PosController::class, "getById"])->middleware("auth");
 Route::post("pos/print", [PosController::class, "print"])->middleware("auth");
+Route::get("profile", [ProfileController::class, "index"])->middleware("auth");
+Route::post("profile/update", [ProfileController::class, "update"])->middleware("auth");
 
 Route::controller(ImageController::class)->group(function(){
     Route::get('image-upload', 'index');

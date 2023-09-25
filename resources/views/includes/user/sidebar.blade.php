@@ -34,8 +34,8 @@
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-          Account
+        <a href="/profile" class="nav-link py-3 border-bottom {{ $page == 'profile' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+          Profile
         </a>
       </li>
     </ul>

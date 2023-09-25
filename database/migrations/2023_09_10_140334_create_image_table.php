@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->integer('productid');
-            $table->integer('ismain')->default(1);
+            $table->boolean('ismain')->default(true);
         });
     }
 
