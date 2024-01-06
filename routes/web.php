@@ -29,7 +29,7 @@ Route::get("register", [UserController::class, "register"]);
 Route::get("login", [UserController::class, "login"])->name("login");
 Route::post("login", [UserController::class, "authenticate"]);
 Route::post("register", [UserController::class, "signup"]);
-Route::get("dashboard", [UserController::class, "dashboard"])->middleware("auth");
+// Route::get("dashboard", [UserController::class, "dashboard"])->middleware("auth");
 Route::get("logout",[UserController::class, "logout"]);
 Route::post("product/add", [ProductController::class, "add"])->middleware("auth");
 Route::get("products/add", [ProductController::class, "show"])->middleware("auth");
@@ -56,4 +56,14 @@ Route::get('/test-connection', function () {
     } catch (Exception $e) {
         return "Unable to connect to the database. Error: " . $e->getMessage();
     }
+});
+
+Route::middleware(['role:admin', "auth"])->group(function () {
+    Route::get("dashboard", [UserController::class, "dashboard"]);
+    Route::get("/users", [UserController::class, "users"]);
+    Route::post("/user/update", [UserController::class, "update"]);
+    Route::get("products", [ProductController::class, "all"]);
+});
+
+Route::middleware(['role:user', "auth"])->group(function () {
 });

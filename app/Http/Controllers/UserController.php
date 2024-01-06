@@ -73,4 +73,19 @@ class UserController extends Controller
 
     }
 
+    public function users(Request $request){
+        $users = User::where("role", "user")->get();
+
+        return view("user/list", [ "users" => $users]);
+    }
+
+    public function update(Request $request){
+        $user = User::findOrFail($request->input("id"));
+        $approved = !$request->input("approved");
+        $user->approved = $approved;
+        $user->save();
+        
+        die(json_encode(array("status" => $approved)));
+    }
+
 }

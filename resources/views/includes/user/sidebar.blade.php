@@ -38,6 +38,11 @@
           Profile
         </a>
       </li>
+      <li>
+        <a href="/users" class="nav-link py-3 border-bottom {{ $page == 'users' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+          Users
+        </a>
+      </li>
     </ul>
     <div class="dropdown border-top">
       <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
