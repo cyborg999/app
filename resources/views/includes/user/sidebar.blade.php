@@ -1,7 +1,21 @@
-
 @php
     $page = app()->view->getSections()["page"];
 @endphp
+<aside class="sec0">
+      <figure class="sec0_fig1"></figure>
+      <ul>
+        
+          <li class="active home">
+          <!-- <a href="/dashboard" class="{{ $page == 'home' ? 'active' : ''}}"></a> -->
+          </li>
+          <li class="pos"></li>
+          <li class="user"></li>
+          <li class="product"></li>
+          <li class="setting"></li>
+          <li class="logout"></li>
+      </ul>
+  </aside>
+<!-- 
 <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
     <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
       <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -56,4 +70,4 @@
         <li><a class="dropdown-item" href="/logout">Sign out</a></li>
       </ul>
     </div>
-  </div>
+  </div> -->
