@@ -3,71 +3,18 @@
 @endphp
 <aside class="sec0">
       <figure class="sec0_fig1"></figure>
-      <ul>
+      <ul class="sidenav">
         
-          <li class="active home">
-          <!-- <a href="/dashboard" class="{{ $page == 'home' ? 'active' : ''}}"></a> -->
-          </li>
-          <li class="pos"></li>
-          <li class="user"></li>
-          <li class="product"></li>
-          <li class="setting"></li>
+          <li class="home {{ $page == 'home' ? 'active' : ''}}"> <a href="/dashboard">Home</a></li>
+          <li class="pos {{ $page == 'pos' ? 'active' : ''}}"> <a href="/pos">POS</a></li>
+          <li class="user {{ $page == 'home' ? 'active' : ''}}"> <a href="/dashboard">Users</a></li>
+          <li class="product {{ $page == 'product' ? 'active' : ''}}"> <a href="/products">products</a></li>
+          <li class="profile {{ $page == 'profile' ? 'active' : ''}}"> <a href="/profile">profile</a></li>
+          <li class="inventory {{ $page == 'inventory' ? 'active' : ''}}"> <a href="/inventory">inventory</a></li>
+          <li class="users {{ $page == 'users' ? 'active' : ''}}"> <a href="/users">users</a></li>
+          <li class="setting">settings</li>
+          <li class="setting">supply</li>
+          <li class="setting">sale</li>
           <li class="logout"></li>
       </ul>
   </aside>
-<!-- 
-<div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 4.5rem;">
-    <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
-      <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="visually-hidden">Icon-only</span>
-    </a>
-    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-      <li class="nav-item">
-        <a href="/dashboard" class="nav-link {{ $page == 'home' ? 'active' : ''}} py-3 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-          <img src="{{ url('/images/icons/home.png'); }}" alt="home"/>
-        </a>
-      </li>
-      <li>
-        <a href="/products" class="nav-link py-3 border-bottom {{ $page == 'product' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-          <img src="{{ url('/images/icons/product.png'); }}" alt="product"/>
-        </a>
-      </li>
-      <li>
-        <a href="/pos" class="nav-link py-3 border-bottom {{ $page == 'pos' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-        <img src="{{ url('/images/icons/pos.png'); }}" alt="pos"/>
-        </a>
-      </li>
-      <li>
-        <a href="/inventory" class="nav-link py-3 border-bottom {{ $page == 'inventory' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-          Inventory
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-          Sale
-        </a>
-      </li>
-      <li>
-        <a href="/profile" class="nav-link py-3 border-bottom {{ $page == 'profile' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-          Profile
-        </a>
-      </li>
-      <li>
-        <a href="/users" class="nav-link py-3 border-bottom {{ $page == 'users' ? 'active' : ''}}" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-          Users
-        </a>
-      </li>
-    </ul>
-    <div class="dropdown border-top">
-      <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
-      </a>
-      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
-      </ul>
-    </div>
-  </div> -->

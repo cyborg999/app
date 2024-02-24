@@ -6,7 +6,7 @@
             <!-- @section('title', 'Page Title') -->
            
             @include('includes.user.sidebar')
-            <section class="content">
+            <section class="content container">
                 @yield('content')
             </section>
         </main>

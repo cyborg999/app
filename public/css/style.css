@@ -31,16 +31,17 @@ table {
 .sec0_fig1 {
     width: 56px;
     height: 40px;
-    background: url(./../images/global/logo.svg) no-repeat;
+    background: url(./../images/global/logo3.png) no-repeat;
     background-size: contain;
     margin: 50px auto 100px;
     display: block;
 }
-.sec0 ul {
+.sec0 ul.sidenav {
     position: relative;
     min-height: 70%;
+    padding: 0;
 }
-.sec0 li {
+.sec0 .sidenav li {
     list-style-type: none;
     display: block;
     background-color: #f7f9fb;
@@ -67,12 +68,12 @@ table {
 .sec0 .setting {
     background: #f7f9fb url(./../images/global/gear-solid.svg) center no-repeat;
 }
-.sec0 li {
+.sec0 li  {
     background-size: 50%!important;
     opacity: .9;
     cursor: pointer;
 }
-.sec0 li.active {
+.sec0 .sidenav .active {
     opacity: 1; 
     /* background-color: #1b84ff!important; */
     color: white;
@@ -83,6 +84,17 @@ table {
     position: absolute;
     left: 40px;
     background-size: 35%!important;
+}
+.sidenav a {
+    text-decoration: none;
+    color: white;
+    background: black;
+    padding: 3px;
+    font-size: 9px;
+    border-radius: 2px;
+    position: relative;
+    top: 84%;
+    /* display: none; */
 }
 
 .sec1 {
@@ -135,14 +147,23 @@ table {
     overflow: hidden;
     background: #ecedf2;
     margin-bottom: 10px;
+    height: 175px;
+}
+.img-fluid {
+    width: 80%;
 }
 .sec1_p1 {
-    width: 200px;
-    height: 175px;
-    background: url(./../images/global/p1.jpg)  top center no-repeat;
-    background-size: contain;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
     max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 .sec1_p2 {
     width: 200px;
@@ -282,6 +303,11 @@ table {
 }
 .sec1_subtotal tr td {
     border-bottom: 1px solid #3fc481;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+.sec1_subtotal tr.total {
+    color: #fffc00;
 }
 .sec1_subtotal tr.total td {
     border: none;

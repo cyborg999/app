@@ -2,30 +2,135 @@
 @section('title', 'POS - Dashboard')
 @section('page', 'pos')
 @section("content")
+<article class="container">
+    <div class="sec_left">
+        <div class="sec1_search">
+            <form class="form" id="frmSearch" method="post" action="/pos/search">
+                @csrf
+                <input type="text" class="form-control search" name="search" placeholder="search item or category"/>
+            </form>
+        </div>
+        <div id="result">
+
+        </div>
+    </div>
+    <div class="sec_right">
+        <div class="sec1_pos">
+            <div class="sec1_cashier">
+                <figure class="sec1_photo"></figure>
+                <h5><small>I'm your cashier</small> Joven Logo</h5>
+            </div>
+            <div class="sec1_total">
+                <h2>Order Details</h2>
+                <table>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="img-container">
+                                <figure class="sec1_p3"></figure>
+                            </div>
+                        </td>
+                        <td class="sec1_title">T-Bone Stake</td>
+                        <td>
+                            <div class="sec1_btns">
+                                <button class="btn_minus">-</button>
+                                <p>1</p>
+                                <button class="btn_plus">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <em>$14.90</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="img-container">
+                                <figure class="sec1_p2"></figure>
+                            </div>
+                        </td>
+                        <td class="sec1_title">T-Bone Stake</td>
+                        <td>
+                            <div class="sec1_btns">
+                                <button class="btn_minus">-</button>
+                                <p>1</p>
+                                <button class="btn_plus">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <em>$14.90</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="img-container">
+                                <figure class="sec1_p1"></figure>
+                            </div>
+                        </td>
+                        <td class="sec1_title">T-Bone Stake</td>
+                        <td>
+                            <div class="sec1_btns">
+                                <button class="btn_minus">-</button>
+                                <p>1</p>
+                                <button class="btn_plus">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <em>$14.90</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="img-container">
+                                <figure class="sec1_p3"></figure>
+                            </div>
+                        </td>
+                        <td class="sec1_title">T-Bone Stake</td>
+                        <td>
+                            <div class="sec1_btns">
+                                <button class="btn_minus">-</button>
+                                <p>1</p>
+                                <button class="btn_plus">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            <em>$14.90</em>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="sec1_subtotal">
+                    <tbody>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td>$199.50</td>
+                        </tr>
+                        <tr>
+                            <td>Discounts</td>
+                            <td>-$8.00</td>
+                        </tr>
+                        <tr>
+                            <td>Tax(12%)</td>
+                            <td>$11.20</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="total">
+                            <td>Total</td>
+                            <td>$192.46</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <button id="print">Print Bills</button>
+            </div>
+        </div>
+    </div>
+</article>
+
   <div class="container">
     <div class="row">
     <div class="col-lg-6">
-            <form class="form" id="frmSearch" method="post" action="/pos/search">
-                @csrf
-                <input type="text" class="form-control" name="search" />
-                <input type="submit" class="btn btn-md btn-primary" value="search"/>
-            </form>
 
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>SRP</th>
-                        <th>Quantity</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="result">
-                    
-                </tbody>
-            </table>
+           
         </div>
         <div class="col-lg-6">
             <h3>Total: P<span id="total">0.00</span></h3>
