@@ -16,7 +16,12 @@
 </style>
   <div class="container">
     <div class="row">
-        <h1 class="h1">List of Users</h1>
+        <div class="col">
+            <h1 class="h1">List of Users</h1>
+        </div>
+        <div class="col">
+            <a href="/users/add">Add New</a>
+        </div>
     </div>
     <div class="row">
       <table class="table table-hover"> 

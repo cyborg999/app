@@ -12,9 +12,9 @@
           <li class="profile {{ $page == 'profile' ? 'active' : ''}}"> <a href="/profile">profile</a></li>
           <li class="inventory {{ $page == 'inventory' ? 'active' : ''}}"> <a href="/inventory">inventory</a></li>
           <li class="users {{ $page == 'users' ? 'active' : ''}}"> <a href="/users">users</a></li>
-          <li class="setting">settings</li>
+          <!-- <li class="setting">settings</li>
           <li class="setting">supply</li>
-          <li class="setting">sale</li>
-          <li class="logout"></li>
+          <li class="setting">sale</li> -->
+          <li class="logout" href="/logout">logout</li>
       </ul>
   </aside>

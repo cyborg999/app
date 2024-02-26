@@ -61,9 +61,10 @@ Route::get('/test-connection', function () {
 Route::middleware(['role:admin', "auth"])->group(function () {
     Route::get("dashboard", [UserController::class, "dashboard"]);
     Route::get("/users", [UserController::class, "users"]);
+    Route::get("/users/add", [UserController::class, "add"]);
     Route::post("/user/update", [UserController::class, "update"]);
     Route::get("products", [ProductController::class, "all"]);
 });
 
-Route::middleware(['role:user', "auth"])->group(function () {
-});
+// Route::middleware(['role:user', "auth"])->group(function () {
+// });

@@ -94,7 +94,7 @@ table {
     border-radius: 2px;
     position: relative;
     top: 84%;
-    /* display: none; */
+    display: none;
 }
 
 .sec1 {

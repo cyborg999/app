@@ -121,6 +121,7 @@
                         qtys.push(parseInt(qty));
 
                     });
+                    
                     return [ids, qtys];
                 }
 

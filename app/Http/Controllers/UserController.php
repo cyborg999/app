@@ -40,8 +40,11 @@ class UserController extends Controller
     }
 
     public function dashboard(){
-    
         return view("user/dashboard");
+    }
+
+    public function add(){
+        return view("user.register");
     }
 
     public function logout(Request $request){
@@ -61,6 +64,7 @@ class UserController extends Controller
         $credentials["active"] = 1;
         // admin view
         // if (Auth::guard('admin')->attempt($credentials)) {
+            
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
