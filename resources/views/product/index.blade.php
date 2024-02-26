@@ -2,8 +2,9 @@
 @section('title', 'Product - Dashboard')
 @section('page', 'product')
 @section("content")
-  <div class="container">
-  <h1 class="h1">All Products</h1>
+    <div class="container">
+        <h1 class="h1">All Products</h1>
+        <a href="products/add" class="btn btn-lg">Add New</a>
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -18,7 +19,8 @@
                 </ul>
             </div>
         @endif
-
+    </div>
+  <div class="container">
         <table border=1 class="table">
             <thead>
                 <tr>

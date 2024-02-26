@@ -23,148 +23,63 @@
             <div class="sec1_total">
                 <h2>Order Details</h2>
                 <table>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="img-container">
-                                <figure class="sec1_p3"></figure>
-                            </div>
-                        </td>
-                        <td class="sec1_title">T-Bone Stake</td>
-                        <td>
-                            <div class="sec1_btns">
-                                <button class="btn_minus">-</button>
-                                <p>1</p>
-                                <button class="btn_plus">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <em>$14.90</em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="img-container">
-                                <figure class="sec1_p2"></figure>
-                            </div>
-                        </td>
-                        <td class="sec1_title">T-Bone Stake</td>
-                        <td>
-                            <div class="sec1_btns">
-                                <button class="btn_minus">-</button>
-                                <p>1</p>
-                                <button class="btn_plus">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <em>$14.90</em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="img-container">
-                                <figure class="sec1_p1"></figure>
-                            </div>
-                        </td>
-                        <td class="sec1_title">T-Bone Stake</td>
-                        <td>
-                            <div class="sec1_btns">
-                                <button class="btn_minus">-</button>
-                                <p>1</p>
-                                <button class="btn_plus">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <em>$14.90</em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="img-container">
-                                <figure class="sec1_p3"></figure>
-                            </div>
-                        </td>
-                        <td class="sec1_title">T-Bone Stake</td>
-                        <td>
-                            <div class="sec1_btns">
-                                <button class="btn_minus">-</button>
-                                <p>1</p>
-                                <button class="btn_plus">+</button>
-                            </div>
-                        </td>
-                        <td>
-                            <em>$14.90</em>
-                        </td>
-                    </tr>
+                    <tbody id="cartresult">
+
                     </tbody>
                 </table>
                 <table class="sec1_subtotal">
                     <tbody>
                         <tr>
                             <td>Subtotal</td>
-                            <td>$199.50</td>
+                            <td>0.00</td>
                         </tr>
                         <tr>
                             <td>Discounts</td>
-                            <td>-$8.00</td>
+                            <td>0.00</td>
                         </tr>
                         <tr>
                             <td>Tax(12%)</td>
-                            <td>$11.20</td>
+                            <td>0.00</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr class="total">
                             <td>Total</td>
-                            <td>$192.46</td>
+                            <td><span id="total">0.00</span></td>
                         </tr>
                     </tfoot>
                 </table>
-                <button id="print">Print Bills</button>
+                <form id="frmPrint" action="pos/print">
+                    @csrf
+                    <input type="hidden" name="id" class="id" value=""/>
+                    <input type="hidden" name="qty" class="qty" value=""/>
+                    <input type="submit" id="print" class="btn btn-success btn-md" value="Print"/>
+                </form>
             </div>
         </div>
     </div>
 </article>
-
-  <div class="container">
-    <div class="row">
-    <div class="col-lg-6">
-
-           
-        </div>
-        <div class="col-lg-6">
-            <h3>Total: P<span id="total">0.00</span></h3>
-            <form id="frmPrint" action="pos/print">
-                @csrf
-                <input type="hidden" name="id" class="id" value=""/>
-                <input type="hidden" name="qty" class="qty" value=""/>
-                <input type="submit" class="btn btn-success btn-md" value="Print"/>
-            </form>
-            <table id="cart">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>SRP</th>
-                        <th>Quantity</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="cartresult">
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
     <script src="{{ url('js/jquery.js') }}"></script>
     <script type="text/html" id="productTPL">
         <tr data-id="[ID]">
-            <td><img class="img-fluid" src="[IMG]" width="30"/></td>
-            <td>[NAME]</td>
-            <td class="srp">[SRP]</td>
-            <td><input type="number" class="qty" min="1" width="20" value="1"/></td>
             <td>
-                <a href="" class="remove btn-sm btn-danger btn">remove</a>
+                <div class="img-container">
+                    <figure class="sec1_p3">
+                        <img class="img-fluid" src="[IMG]" width="30"/>
+                    </figure>
+                </div>
+            </td>
+            <td class="sec1_title">[NAME]</td>
+            <td>
+                <div class="sec1_btns">
+                    <button class="btn_minus">-</button>
+                    <input type="number" class="qty" min="1" width="20" value="1"/>
+                    <button class="btn_plus">+</button>
+                </div>
+            </td>
+            <td><em >₱<span class="srp">[SRP]</span></em></td>
+            <td>
+                <a href="" class="remove btn-sm btn">remove</a>
             </td>
         </tr>
     </script>
@@ -186,6 +101,8 @@
                     });
 
                     $("#total").html(new Intl.NumberFormat().format(total));
+
+                    __listen();
                 }
 
                 let print = () => {
@@ -251,15 +168,41 @@
                 });
                     
                 let __listen = function(){
+                    $(".btn_minus").off().on("click", function(e){
+                        e.preventDefault();
+                        
+                        let me = $(this)
+                        let qty = me.parents(".sec1_btns").find(".qty");
+
+                        if(qty.val() > 1){
+                            let val = parseInt(qty.val()) - 1
+                            qty.val(val);
+                        }
+
+                        getTotal();
+                    });
+
+                    $(".btn_plus").off().on("click", function(e){
+                        e.preventDefault();
+                        
+                        let me = $(this)
+                        let qty = me.parents(".sec1_btns").find(".qty");
+
+                        let val = parseInt(qty.val()) + 1
+                        qty.val(val);
+                        
+                        getTotal();
+                    });
 
                     $(".remove").off().on("click", function(e){
                         e.preventDefault();
 
                         $(this).parents("tr").remove();
                         getTotal();
+
                     });
 
-                    $(".qty").off().on("change", function(){
+                    $(".qty").off().on("change keyup", function(){
                         getTotal();
                     });
 

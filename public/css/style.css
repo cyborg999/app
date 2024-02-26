@@ -168,7 +168,7 @@ table {
 .sec1_p2 {
     width: 200px;
     height: 175px;
-    background: url(./../images/global/p2.jpg)  top center no-repeat;
+    /* background: url(./../images/global/p2.jpg)  top center no-repeat; */
     background-size: contain;
     margin: 0 auto;
     max-width: 100%;
@@ -176,7 +176,7 @@ table {
 .sec1_p3 {
     width: 200px;
     height: 175px;
-    background: url(./../images/global/p3.jpg)  top center no-repeat;
+    /* background: url(./../images/global/p3.jpg)  top center no-repeat; */
     background-size: contain;
     margin: 0 auto;
     max-width: 100%;
@@ -333,4 +333,31 @@ table {
 #print:hover {
     background-color: #056ee9;
     transition: 1s all;
+}
+#cartresult .img-container figure {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#cartresult .qty {
+    width: 50px;
+    padding: 5px;
+    margin: 0;
+    line-height: 1;
+    text-align: center;
+}
+#cartresult .remove {
+    background: none;
+    border: none;
+    color: red;
+    font-weight: 600;
+    margin-left: 20px;
 }
