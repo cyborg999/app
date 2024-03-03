@@ -207,6 +207,105 @@ table {
     padding-top: 60px;
     background: #fafafa;
 }
+.sec1_preview {
+    position: absolute;
+    left: -60%;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 60%;
+    top: 0;
+    background-color: white;
+    text-align: center;
+}
+.sec1_preview_logo {
+    background: url(./../images/global/logo1.png) center no-repeat;
+    background-size: contain;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+}
+.sec2_preview_bottom {
+    margin-top: 20px;
+}
+.sec2_preview_bottom p {
+    padding: 0 30px;
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+}
+.sec1_preview thead {
+    margin-bottom: 20px;
+}
+.sec1_preview th {
+    font-size: 12px;
+}
+.sec1_preview tr {
+    font-size: 12px;
+    text-align: center;
+}
+.sec1_preview small {
+    padding-bottom: 10px;
+    display: block;
+}
+.sec1_preview td b {
+    display: block;
+    margin: 3px 0;
+    box-sizing: border-box;
+}
+.sec1_preview td p {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 3px 0 3px;
+
+}
+.sec1_preview td em {
+    text-align: left;
+    padding: 3px;
+    float: left;
+    margin-left: 5px;
+}
+.sec1_preview .sec1_title {
+    text-align: left;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+.sec1_preview th:nth-of-type(odd){
+    text-align: left;
+}
+.sec1_preview th:nth-of-type(even){
+    text-align: right;
+}
+.sec1_preview .bordered {
+    border: 1px dashed black;
+    margin: 10px;
+    padding: 10px;
+    line-height: 2;
+}
+.sec1_preview tr td:first-of-type {
+    text-align: left;
+    padding-left: 5px;
+}
+#receiptPreview .sec1_btns,
+#receiptPreview td:last-of-type,
+#receiptPreview td:first-of-type {
+    display: none;
+}
+.sec1_preview h5 {
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1;
+    margin: 5px 0;
+}
+.sec1_preview h6 {
+    line-height: 1;
+    font-size: 12px;
+}
+
 .sec1_cashier {
     display: flex;
     flex-direction: row;
@@ -280,6 +379,12 @@ table {
     flex-direction: row;
     justify-content: space-between;
     width: 150px;
+}
+.sec1_preview_only {
+    display: none;
+}
+.receiptPreview .sec1_preview_only {
+    display: block;
 }
 .sec1_total em {
     font-style: normal;

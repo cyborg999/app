@@ -11,5 +11,5 @@ class Transaction extends Model
     use HasFactory;
 
     protected $table = "transaction";
-    protected $fillable = ["userid", "total"];
+    protected $fillable = ["userid", "payment_received", "total"];
 }
