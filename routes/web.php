@@ -38,6 +38,7 @@ Route::get("products", [ProductController::class, "all"])->middleware("auth");
 Route::get("inventory", [InventoryController::class, "index"])->middleware("auth");
 Route::post("inventory/add", [InventoryController::class, "add"])->middleware("auth");
 Route::post("pos/search", [PosController::class, "search"])->middleware("auth");
+Route::post("pos/scan", [PosController::class, "scan"])->middleware("auth");
 Route::get("pos", [PosController::class, "index"])->middleware("auth");
 Route::post("pos/getById", [PosController::class, "getById"])->middleware("auth");
 Route::post("pos/print", [PosController::class, "print"])->middleware("auth");

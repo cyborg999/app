@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer("userid");
             $table->float("payment_received",8,2);
+            $table->string("payment_option")->default("cash");
             $table->float("total",8,2);
         });
     }

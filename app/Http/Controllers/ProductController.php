@@ -45,9 +45,9 @@ class ProductController extends Controller
             , "orig" => "required"
             , "qty" => "required|min:1"
         ]);
-
+        $validation["category_id"] = 1;
+        $validation["discount_ids"] = 0;
         $validation["user_id"] = Auth::id();
-
 
         //upload img
         $imageName = time().'.'.$request->image->extension();  

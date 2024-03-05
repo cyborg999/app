@@ -4,12 +4,70 @@
 @section("content")
 <article class="container">
     <div class="sec_left">
-        <div class="sec1_search">
-            <form class="form" id="frmSearch" method="post" action="/pos/search">
-                @csrf
-                <input type="text" class="form-control search" name="search" placeholder="search item or category"/>
-            </form>
+        <style>
+            /* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: none;
+  border-top: none;
+  margin-bottom: 10px;
+}
+        </style>
+        <div class="tab">
+            <button class="tablinks" target="#searchTab">Search</button>
+            <button class="tablinks active" target="#scanTab">Scan</button>
         </div>
+
+        <!-- Tab content -->
+        <div id="searchTab" class="tabcontent ">
+            <div class="sec1_search">
+                <form class="form twowayform" id="frmSearch" method="post" action="/pos/search">
+                    @csrf
+                    <input type="text" class="form-control search" name="search" placeholder="search item or category"/>
+                </form>
+            </div>
+        </div>
+
+        <div id="scanTab" class="tabcontent active">
+            <div class="sec1_search">
+                <form class="form twowayform" id="frmScan" method="post" action="/pos/scan">
+                    @csrf
+                    <input type="text" class="form-control search" name="search" placeholder="scan barcode"/>
+                </form>
+            </div>
+        </div>
+
+
+        
         <div id="result">
 
         </div>
@@ -155,16 +213,16 @@
                             <td><em style="line-height:1;margin:0;padding:0;box-sizing:border-box;font-family: Inter, Helvetica, sans-serif;text-align:center; line-height: 1; font-size: 12px;">Payment Received</em></td>
                             <td></td>
                             <td></td>
-                            <td style="line-height:1;margin:0;padding:0;box-sizing:border-box;font-family: Inter, Helvetica, sans-serif;text-align:center; line-height: 1; font-size: 12px;">100</td>
+                            <td style="line-height:1;margin:0;padding:0;box-sizing:border-box;font-family: Inter, Helvetica, sans-serif;text-align:center; line-height: 1; font-size: 12px;" id="previewPaymentReceived">00.00</td>
                         </tr>
                         <tr>
                             <td><em>Change</em></td>
                             <td></td>
                             <td></td>
-                            <td>100</td>
+                            <td id="previewChange">00.00</td>
                         </tr>
                         <tr>
-                            <td><em>4 Items</em></td>
+                            <td><em><span id="totalItems">0</span> Items</em></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -172,23 +230,32 @@
                     <p>Customer Agrees to pay the above total amount.</p>
                     <p>Thanks for shopping here, we will see you soon!</p>
                     <br/>
-                    <p style="line-height:1;margin:0;padding-bottom:10px;box-sizing:border-box;font-family: Inter, Helvetica, sans-serif;text-align:center; line-height: 1; font-size: 12px;"><small>02/21/2024 11:11pm</small></p>
+                    <p style="line-height:1;margin:0;padding-bottom:10px;box-sizing:border-box;font-family: Inter, Helvetica, sans-serif;text-align:center; line-height: 1; font-size: 12px;"><small id="currDate">02/21/2024 11:11pm</small></p>
                 </div>
             </div>
-            <div class="sec1_cashier">
+            <!-- <div class="sec1_cashier">
                 <figure class="sec1_photo"></figure>
                 <h5><small>I'm your cashier</small> Joven Logo</h5>
-            </div>
+            </div> -->
             <div class="sec1_total">
                 <h2>Order Details</h2>
                 <table>
+                    <!-- <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th><small>sub</small>Total</th>
+                        </tr>
+                    </thead> -->
                     <tbody id="cartresult">
 
                     </tbody>
                 </table>
                 <table class="sec1_subtotal">
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td>Subtotal</td>
                             <td>0.00</td>
                         </tr>
@@ -199,10 +266,14 @@
                         <tr>
                             <td>Tax(12%)</td>
                             <td>0.00</td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td>Payment Received</td>
-                            <td><input type="text" id="paymentReceived" placeholder="00.00"></td>
+                            <td><input type="number" class="form-control" id="paymentReceived" placeholder="00.00" required></td>
+                        </tr>
+                        <tr>
+                            <td>Change</td>
+                            <td id="change2">00.00</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -215,6 +286,7 @@
                 </table>
                 <form id="frmPrint" action="pos/print">
                     @csrf
+                    <input type="hidden" name="payment" class="payment" value=""/>
                     <input type="hidden" name="id" class="id" value=""/>
                     <input type="hidden" name="qty" class="qty" value=""/>
                     <input type="submit" id="print" class="btn btn-success btn-md" value="Print"/>
@@ -254,10 +326,23 @@
     <script>
         (function($){
             $(document).ready(function(){
+                $(".tablinks").on("click", function(){
+                    let me = $(this);
+                    let target = me.attr("target");
+                    // searchTab
+                    console.log(target)
+                    
+                    $(".tablinks").removeClass("active");
+                    $(".tabcontent").removeClass("active");
+                    $(target).addClass("active");
+                    me.addClass("active");
+
+                });
+
                 let getTotal = () => {
                     let tbody = $("#cartresult");
                     let total = 0;
-
+                    
                     tbody.find("tr").each(function(x, tr){
                         let product = $(tr);
                         let productId = product.data("id");
@@ -267,21 +352,47 @@
                         let previewQty = product.find(".sec1_preview_only");
 
                         total += qty *srp;
+
                         itemTotal.html(total)
                         previewQty.html(qty)
                     });
 
-                    $("#total").html(new Intl.NumberFormat().format(total));
-
+                    let finalTotal = new Intl.NumberFormat().format(total);
+                    $("#total").html(finalTotal);
+             
                     __listen();
                 }
 
-                let generateReceiptPreview = () => {
+                let getTimeStamp = () => {
+                    var currentDate = new Date();
+                    var date = currentDate.getDate();
+                    var month = currentDate.getMonth() + 1; // Months are zero based, so we add 1
+                    var year = currentDate.getFullYear();
+                    var hours = currentDate.getHours();
+                    var ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // Handle midnight (0 hours)
+
+                    var minutes = currentDate.getMinutes();
+                    var seconds = currentDate.getSeconds();
+
+                    return month +"/"+date+"/"+year+" "+hours+":"+minutes+" "+ampm;
+                }
+
+                let generateReceiptPreview = (itemCount) => {
                     let tbl1 = $("#cartresult")
                     let tbl2 = $("#receiptPreview");
 
                     tbl2.html("");
                     tbl2.append(tbl1.html());
+
+                    let paymentReceived = parseFloat($("#paymentReceived").val());
+                    let finalTotal = parseFloat($("#total").html());
+                    
+                    $("#previewPaymentReceived").html(paymentReceived);
+                    $("#previewChange").html($("#paymentReceived").val() - finalTotal);
+                    $("#totalItems").html(itemCount);
+                    $("#currDate").html(getTimeStamp);
                 }
 
                 let print = () => {
@@ -289,26 +400,27 @@
                     let total = 0;
                     let ids = [];
                     let qtys = [];
+                    let itemCount = 0;
 
                     tbody.find("tr").each(function(x, tr){
                         let product = $(tr);
                         let productId = product.data("id");
                         let qty = product.find(".qty").val();
 
+                        itemCount += qty;
                         ids.push(productId);
                         qtys.push(parseInt(qty));
-
-                        generateReceiptPreview();
-
                     });
-                    
+
+                    generateReceiptPreview(parseInt(itemCount));
+
                     return [ids, qtys];
                 }
 
                 let printReceipt = () => {
                     let printContent = $("#sec1_preview").html();
                     var originalContent = document.body.innerHTML;
-
+                  
                     document.body.innerHTML = printContent;
                     window.print();
                     document.body.innerHTML = originalContent;
@@ -336,12 +448,16 @@
 
                     let me = $(this);
                     let [id, qty] = print();
-
-                    printReceipt();
-                    return false;
+                    let paymentReceived = $("#paymentReceived").val();
 
                     me.find(".id").val(id);
                     me.find(".qty").val(qty);
+                    me.find(".payment").val(paymentReceived);
+
+                    if(paymentReceived == ""){
+                        alert("Enter Payment Received")
+                        return false;
+                    }
 
                     $.ajax({
                         url : me.attr("action"),
@@ -353,14 +469,20 @@
 
                             if(res.success == false){
                                 alert("Transaction failed, please try again");
+                            } else {
+                                // print receipt
+                                // printReceipt();
+
+                                $("#result, #cartresult").html("");
                             }
 
-                            $("#result, #cartresult").html("");
                         }
                     });
                 });
                     
                 let __listen = function(){
+               
+
                     $(".btn_minus").off().on("click", function(e){
                         e.preventDefault();
                         
@@ -440,9 +562,32 @@
                     });
                 }
 
-                $("#frmSearch").on("submit", function(e){
+                __listen();
+
+                $("#paymentReceived").on("change keyup", function(){
+                    let me = $(this);
+                    let payment = me.val();
+                    let total = parseFloat($("#total").html());
+
+                    $("#change2").html(parseFloat(payment) - total);
+                });
+
+                $(".search").on("change keyup", function(){
+                    let me = $(this);
+                    let txt = me.val();
+                    let form = me.parents(".twowayform");
+                    let type = form.attr("id");
+                    console.log(txt, type);
+
+                    if(type == "frmScan"){
+                        form.trigger("submit");
+                    }
+                });
+
+                $(".twowayform").on("submit", function(e){
                     let me = $(this);
                     let tbody = $("#result");
+                    let type = me.attr("id");
                     
                     e.preventDefault();
                     tbody.html("");
@@ -452,9 +597,18 @@
                         data : me.serialize(),
                         type : "post",
                         success : function(res){
-                            tbody.append(res)
+                            console.log(res, type)
+                            tbody.append(res);
+
 
                             __listen();
+
+                            if(type == "frmScan"){
+                                $(".frmAdd").first().trigger("submit");
+                                $(".search").val("");
+                                console.log("trigg")
+                            }
+                            
                         }
                     })
                 });

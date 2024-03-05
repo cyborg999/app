@@ -49,9 +49,14 @@ table {
     text-align: center;
     padding: 10px;
     padding: 0;
+
+    border-radius: 22px;
+}
+.sec0 .sidenav li a {
     width: 58px;
     height: 58px;
-    border-radius: 22px;
+    display: block;
+    margin: 0 auto;
 }
 .sec0 .home {
     background: #f7f9fb url(./../images/global/house-solid.svg) center no-repeat;
@@ -63,7 +68,7 @@ table {
     background: #f7f9fb url(./../images/global/user-solid.svg) center no-repeat;
 }
 .sec0 .product {
-    background: #f7f9fb url(./../images/global/computer-solid.svg) center no-repeat;
+    background: #f7f9fb url(./../images/global/clipboard-regular.svg) center no-repeat;
 }
 .sec0 .setting {
     background: #f7f9fb url(./../images/global/gear-solid.svg) center no-repeat;
@@ -94,7 +99,6 @@ table {
     border-radius: 2px;
     position: relative;
     top: 84%;
-    display: none;
 }
 
 .sec1 {
@@ -465,4 +469,16 @@ table {
     color: red;
     font-weight: 600;
     margin-left: 20px;
+}
+.tablinks.active {
+    background-color: orange;
+}
+.tabcontent {
+    display: none;
+}
+.tabcontent.active {
+    display: block;
+}
+.sec1_preview {
+    display: none;
 }

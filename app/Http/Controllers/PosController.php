@@ -19,13 +19,14 @@ class PosController extends Controller
     public function print(Request $request){
         $ids = $request->input("id");
         $qtys = $request->input("qty");
+        $paymentReceived = $request->input("payment");
         $id = $ids != null ? explode(",",$ids) : $ids;
         $qty = $qtys != null ? explode(",",$qtys) : $qtys;
 
         try {
             DB::beginTransaction();
 
-            $transaction = TransactionController::print();
+            $transaction = TransactionController::print($paymentReceived);
             $total = 0;
 
             foreach($id as $idx => $i){
@@ -94,6 +95,19 @@ class PosController extends Controller
             ->leftJoin("image", "product.id", "=", "image.productid")
             ->where("product.name", "like", "%$search%")
             ->select("product.*", "image.name as path")
+            ->get();
+        
+        return view("pos/search", ["data" => $products]);
+    }
+
+    public function scan(Request $request){
+        $search = $request->input("search");
+
+        $products = DB::table('product')
+            ->leftJoin("image", "product.id", "=", "image.productid")
+            ->where("product.barcode",  $search)
+            ->select("product.*", "image.name as path")
+            ->limit(1)
             ->get();
         
         return view("pos/search", ["data" => $products]);
