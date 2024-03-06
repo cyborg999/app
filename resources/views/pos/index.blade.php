@@ -594,10 +594,10 @@
                 function saveInput(me,val){
                     let form = me.parents(".twowayform");
                     let type = form.attr("id");
-
-                    if(type == "frmScan"){
+                    console.log(type)
+                    // if(type == "frmScan"){
                         form.trigger("submit");
-                    }
+                    // }
                 }
 
                 const processChange = debounce((me,val) => saveInput(me,val));
