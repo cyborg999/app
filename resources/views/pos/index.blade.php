@@ -572,17 +572,42 @@
                     $("#change2").html(parseFloat(payment) - total);
                 });
 
-                $(".search").on("change keyup", function(){
-                    let me = $(this);
-                    let txt = me.val();
+                // $(".search").on("change keyup", function(){
+                //     let me = $(this);
+                //     let txt = me.val();
+                //     let form = me.parents(".twowayform");
+                //     let type = form.attr("id");
+                //     console.log(txt, type);
+
+                //     if(type == "frmScan"){
+                //         form.trigger("submit");
+                //     }
+                // });
+
+                function debounce(func, timeout = 200){
+                    let timer;
+                    return (...args) => {
+                        clearTimeout(timer);
+                        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+                    };
+                }
+                function saveInput(me,val){
                     let form = me.parents(".twowayform");
                     let type = form.attr("id");
-                    console.log(txt, type);
 
                     if(type == "frmScan"){
                         form.trigger("submit");
                     }
-                });
+                }
+
+                const processChange = debounce((me,val) => saveInput(me,val));
+
+                $('.search').on('keyup', function(){
+                    console.log("test")
+                    let me = $(this);
+                    let val = me.val();
+                    processChange(me, val);
+                })
 
                 $(".twowayform").on("submit", function(e){
                     let me = $(this);
